@@ -195,40 +195,54 @@ python src/airportDetails.py $query</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>AIRPORT SEARCH</string>
+	<string>Airport Search workflow
+
+1) run "aptinit" to start the datafile download.  You can run this command every so often to make sure you have the latest data set.
+
+You can search the database with the "apt" command
+
+You can load specific airport details with "aptd" which takes an ICAO airport identifier as a paramater</string>
 	<key>uidata</key>
 	<dict>
 		<key>0AB166B0-4A70-4F0C-9DC4-E7CC89AE59B4</key>
 		<dict>
 			<key>xpos</key>
-			<integer>460</integer>
+			<integer>450</integer>
 			<key>ypos</key>
-			<integer>50</integer>
+			<integer>20</integer>
 		</dict>
 		<key>96414E0C-31DE-4450-AF9A-2978AF5C679E</key>
 		<dict>
+			<key>note</key>
+			<string>Downloads latest data set from ourairports.com</string>
 			<key>xpos</key>
 			<integer>50</integer>
 			<key>ypos</key>
-			<integer>210</integer>
+			<integer>180</integer>
 		</dict>
 		<key>B678B89E-8BDD-44D3-ADF6-AE2FF3123C60</key>
 		<dict>
+			<key>note</key>
+			<string>Airport Description
+
+Loads details for specified ICAO airport ID</string>
 			<key>xpos</key>
 			<integer>250</integer>
 			<key>ypos</key>
-			<integer>50</integer>
+			<integer>20</integer>
 		</dict>
 		<key>BF7A2B5A-C1F0-4D67-8F52-E0F602DB7EF9</key>
 		<dict>
+			<key>note</key>
+			<string>Searches entire database for a match</string>
 			<key>xpos</key>
 			<integer>50</integer>
 			<key>ypos</key>
-			<integer>50</integer>
+			<integer>20</integer>
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>1</string>
+	<string>0.5</string>
 	<key>webaddress</key>
 	<string></string>
 </dict>
