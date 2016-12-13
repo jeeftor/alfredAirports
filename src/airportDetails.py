@@ -75,6 +75,10 @@ def get_airport_details_from_icao(icao):
     if not found:
         wf.add_item('No Data for ICAO: ' + icao.upper(),'The airport database does not have any info for this airport', valid=False, icon="images/evil.png")
 
+def surface_decode(surface):
+
+    return surface
+
 def get_runways(icao):
     runways = set()
     with open('runways.csv', 'r') as airport_file:
@@ -115,7 +119,7 @@ def get_runways(icao):
                     img = "{}.png".format(min(le_ident,he_ident))
 
                 title = "Runway {}/{}".format(le_ident,he_ident)
-                subtitle = "Length: {} Width: {} Surface: {} Lights: {}".format(length_ft, width_ft, surface, lighted)
+                subtitle = "Length: {} Width: {} Surface: {} Lights: {}".format(length_ft, width_ft, surface_decode(surface), lighted)
 
                 wf.add_item(title,subtitle=subtitle, icon="images/runway/{}".format(img))
 
