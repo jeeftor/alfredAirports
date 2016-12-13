@@ -17,26 +17,28 @@ def get_airport_details_from_icao(icao):
         for line in airport_file:
             parts = line.split(',')
             if parts[1][1:-1].lower() == icao.lower():
-                apt_type = parts[2][1:-1]
-                name = parts[3][1:-1]
-                latitude_deg = parts[4][1:-1]
-                longitude_deg = parts[5][1:-1]
-                elevation_ft = parts[6][1:-1]
-                continent = parts[7][1:-1]
-                iso_country = parts[8][1:-1]
-                iso_region = parts[9][1:-1]
-                municipality = parts[10][1:-1]
-                scheduled_service = parts[11][1:-1]
-                gps_code = parts[12][1:-1]
-                iata_code = parts[13][1:-1]
-                local_code = parts[14][1:-1]
-                home_link = parts[15][1:-1]
-                wikipedia_link = parts[16][1:-1]
+                apt_type = parts[2].replace('"', '')
+                name = parts[3].replace('"', '')
+                latitude_deg = parts[4].replace('"', '')
+                longitude_deg = parts[5].replace('"', '')
+                elevation_ft = parts[6].replace('"', '')
+                continent = parts[7].replace('"', '')
+                iso_country = parts[8].replace('"', '')
+                iso_region = parts[9].replace('"', '')
+                municipality = parts[10].replace('"', '')
+                scheduled_service = parts[11].replace('"', '')
+                gps_code = parts[12].replace('"', '')
+                iata_code = parts[13].replace('"', '')
+                local_code = parts[14].replace('"', '')
+                home_link = parts[15].replace('"', '')
+                wikipedia_link = parts[16].replace('"', '')
                 keywords = parts[17:]
 
                 lla = "Lat: {} Lon: {} Alt: {} ft".format(latitude_deg, longitude_deg, elevation_ft)
 
 
+                fr24link = "https://www.flightradar24.com/%0.2f/%0.2f/12" % (float(latitude_deg),float(longitude_deg))
+                google_link = 'https://www.google.com/maps/preview/@{},{},14z'.format(latitude_deg,longitude_deg)
                 flag = ""
                 if len(iso_country) > 1:
                     l1 = str(hex(ord(iso_country[0]) + 127397)[2:]).upper()
@@ -44,7 +46,10 @@ def get_airport_details_from_icao(icao):
                     flag = "\\U000{}\\U000{}\\U0000FE0F".format(l1, l2)
 
                 wf.add_item(str(name).decode('utf-8', 'ignore') + " " + flag.decode('unicode_escape'), municipality + ", " + iso_region)
-                wf.add_item("Location", subtitle=lla)
+                wf.add_item("Location", subtitle=lla, icon="images/map.png", valid=True, arg=google_link)
+
+
+                wf.add_item("See Flights", "Open flightradar 24", arg=fr24link, valid=True, icon="images/radar.png")
                 wf.add_item('Wiki', wikipedia_link)
                 wf.add_item('home_link', home_link)
     pass
@@ -56,26 +61,26 @@ def get_runways(icao):
         for line in airport_file:
             parts = line.split(',')
             if parts[2][1:-1].lower() == icao.lower():
-                apt_id = parts[0][1:-1]
-                airport_ref = parts[1][1:-1]
-                airport_ident = parts[2][1:-1]
-                length_ft = parts[3][1:-1]
-                width_ft = parts[4][1:-1]
-                surface = parts[5][1:-1]
-                lighted = parts[6][1:-1]
-                closed = parts[7][1:-1]
-                le_ident = parts[8][1:-1]
-                le_latitude_deg = parts[9][1:-1]
-                le_longitude_deg = parts[10][1:-1]
-                le_elevation_ft = parts[11][1:-1]
-                le_heading_degT = parts[12][1:-1]
-                le_displaced_threshold_ft = parts[13][1:-1]
-                he_ident = parts[14][1:-1]
-                he_latitude_deg = parts[15][1:-1]
-                he_longitude_deg = parts[16][1:-1]
-                he_elevation_ft = parts[17][1:-1]
-                he_heading_degT = parts[18][1:-1]
-                he_displaced_threshold_ft = parts[19][1:-1]
+                apt_id = parts[0].replace('"', '')
+                airport_ref = parts[1].replace('"', '')
+                airport_ident = parts[2].replace('"', '')
+                length_ft = parts[3].replace('"', '')
+                width_ft = parts[4].replace('"', '')
+                surface = parts[5].replace('"', '')
+                lighted = parts[6].replace('"', '')
+                closed = parts[7].replace('"', '')
+                le_ident = parts[8].replace('"', '')
+                le_latitude_deg = parts[9].replace('"', '')
+                le_longitude_deg = parts[10].replace('"', '')
+                le_elevation_ft = parts[11].replace('"', '')
+                le_heading_degT = parts[12].replace('"', '')
+                le_displaced_threshold_ft = parts[13].replace('"', '')
+                he_ident = parts[14].replace('"', '')
+                he_latitude_deg = parts[15].replace('"', '')
+                he_longitude_deg = parts[16].replace('"', '')
+                he_elevation_ft = parts[17].replace('"', '')
+                he_heading_degT = parts[18].replace('"', '')
+                he_displaced_threshold_ft = parts[19].replace('"', '')
 
                 runways.add("{}/{}".format(le_ident,he_ident))
 

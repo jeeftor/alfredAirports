@@ -20,23 +20,23 @@ def main(wf):
             if query in line.lower():
 
                 parts = line.split(',')
-                apt_id = parts[0][1:-1]
-                icao = parts[1][1:-1]
-                apt_type = parts[2][1:-1]
-                name = parts[3][1:-1]
-                latitude_deg = parts[4][1:-1]
-                longitude_deg = parts[5][1:-1]
-                elevation_ft = parts[6][1:-1]
-                continent = parts[7][1:-1]
-                iso_country = parts[8][1:-1]
-                iso_region = parts[9][1:-1]
-                municipality = parts[10][1:-1]
-                scheduled_service = parts[11][1:-1]
-                gps_code = parts[12][1:-1]
-                iata_code = parts[13][1:-1]
-                local_code = parts[14][1:-1]
-                home_link = parts[15][1:-1]
-                wikipedia_link = parts[16][1:-1]
+                apt_id = parts[0].replace('"','')
+                icao = parts[1].replace('"','')
+                apt_type = parts[2].replace('"','')
+                name = parts[3].replace('"','')
+                latitude_deg = parts[4].replace('"','')
+                longitude_deg = parts[5].replace('"','')
+                elevation_ft = parts[6].replace('"','')
+                continent = parts[7].replace('"','')
+                iso_country = parts[8].replace('"','')
+                iso_region = parts[9].replace('"','')
+                municipality = parts[10].replace('"','')
+                scheduled_service = parts[11].replace('"','')
+                gps_code = parts[12].replace('"','')
+                iata_code = parts[13].replace('"','')
+                local_code = parts[14].replace('"','')
+                home_link = parts[15].replace('"','')
+                wikipedia_link = parts[16].replace('"','')
                 keywords = parts[17:]
 
                 # print icao, iata_code, local_code, name, home_link, wikipedia_link
