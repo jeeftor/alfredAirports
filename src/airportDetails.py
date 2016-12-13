@@ -48,7 +48,6 @@ def get_airport_details_from_icao(icao):
                     flag = "\\U000{}\\U000{}\\U0000FE0F".format(l1, l2)
 
                 wf.add_item(str(name).decode('utf-8', 'ignore') + " " + flag.decode('unicode_escape'), municipality + ", " + iso_region)
-                wf.add_item('Runways', subtitle=get_runways(icao), icon="images/runway.png", valid=False)
 
                 wf.add_item("Location", subtitle=lla, icon="images/map.png", valid=True, arg=google_link)
 
@@ -70,6 +69,9 @@ def get_airport_details_from_icao(icao):
                     hl.add_modifier("alt",subtitle='Edit the airport database', arg='http://ourairports.com/airports/' + icao.upper() + '/edit.html', valid=True)
                 else:
                     wf.add_item('Update Airport Info','Edit the airport database', icon="images/web.png", arg='http://ourairports.com/airports/' + icao.upper() + '/edit.html', valid=True)
+
+                get_runways(icao)
+
     if not found:
         wf.add_item('No Data for ICAO: ' + icao.upper(),'The airport database does not have any info for this airport', valid=False, icon="images/evil.png")
 
@@ -101,9 +103,29 @@ def get_runways(icao):
                 he_heading_degT = parts[18].replace('"', '')
                 he_displaced_threshold_ft = parts[19].replace('"', '')
 
-                runways.add("{}/{}".format(le_ident,he_ident))
+                if "L" in le_ident:
+                    img = "{}.png".format(le_ident)
+                elif "L" in he_ident:
+                    img = "{}.png".format(he_ident)
+                if "C" in le_ident or "C" in he_ident:
+                    img = "{}.png".format(min(le_ident,he_ident))
+                elif "L" in he_ident:
+                    img = "{}.png".format(he_ident)
+                else:
+                    img = "{}.png".format(min(le_ident,he_ident))
 
-    return ", ".join(runways)
+                title = "Runway {}/{}".format(le_ident,he_ident)
+                subtitle = "Length: {} Width: {}".format(length_ft, width_ft)
+
+                wf.add_item(title,subtitle=subtitle, icon="images/runway/{}".format(img))
+
+
+
+    ret = ", ".join(runways)
+
+
+    # wf.add_item('Runways', subtitle=ret, icon="images/ryw/Left17.png", valid=False)
+
 
 def get_frequencies(icao):
     import csv
