@@ -5,8 +5,14 @@ This workflow will search for Airports from the [Our Airports](http://ourairport
 ## Supported commands
 
 * aptinit : Initialize the Dataset
+
 * apt : Search the database
+
+![img](docs/apt.png)
+
 * aptd : Load details for a specific ICAO airport
+
+![img](docs/aptd.png)
 
 
 ### Notes:
