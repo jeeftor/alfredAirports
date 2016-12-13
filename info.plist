@@ -244,7 +244,7 @@ Loads details for specified ICAO airport ID</string>
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.5</string>
+	<string>0.6</string>
 	<key>webaddress</key>
 	<string>https://github.com/jeeftor/alfredAirports</string>
 </dict>

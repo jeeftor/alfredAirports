@@ -8,6 +8,7 @@ def main(wf):
     query = str(wf.args[0])
     log.debug(query)
     get_airport_details_from_icao(query)
+    get_frequencies(query)
     wf.send_feedback()
 
 def get_airport_details_from_icao(icao):
@@ -37,8 +38,7 @@ def get_airport_details_from_icao(icao):
 
                 lla = "Lat: {} Lon: {} Alt: {} ft".format(latitude_deg, longitude_deg, elevation_ft)
 
-
-
+                flightaware = "http://flightaware.com/live/airport/" + icao.upper()
                 fr24link = "https://www.flightradar24.com/%0.2f/%0.2f/12" % (float(latitude_deg),float(longitude_deg))
                 google_link = 'https://www.google.com/maps/preview/@{},{},14z'.format(latitude_deg,longitude_deg)
                 flag = ""
@@ -57,13 +57,17 @@ def get_airport_details_from_icao(icao):
                     airnav_link = 'http://www.airnav.com/airport/{}'.format(icao)
                     wf.add_item("Airnav", "Open " + airnav_link, arg=airnav_link, valid=True,
                                 icon='http://thereviewsolution.com/img/rs/airnav.jpg')
-                wf.add_item("See Flights", "Open flightradar 24", arg=fr24link, valid=True, icon="images/radar.png")
+
+
+                fl = wf.add_item("See Flights", "Open flightradar 24", arg=fr24link, valid=True, icon="images/radar.png")
+                fl.add_modifier("alt",subtitle="Open Flight Aware", arg=flightaware, valid=True)
+
 
                 if wikipedia_link != "":
                     wf.add_item('Wiki','Open wikipedia link to airport', arg=wikipedia_link, icon="images/wiki.png", valid=True)
                 if home_link != "":
                     hl = wf.add_item('Airport Website', 'Open the airports website', arg=home_link, icon="images/web.png", valid=True)
-                    hl.add_modifier("cmd",subtitle='Edit the airport database', arg='http://ourairports.com/airports/' + icao.upper() + '/edit.html', valid=True)
+                    hl.add_modifier("alt",subtitle='Edit the airport database', arg='http://ourairports.com/airports/' + icao.upper() + '/edit.html', valid=True)
                 else:
                     wf.add_item('Update Airport Info','Edit the airport database', icon="images/web.png", arg='http://ourairports.com/airports/' + icao.upper() + '/edit.html', valid=True)
     if not found:
@@ -102,7 +106,21 @@ def get_runways(icao):
     return ", ".join(runways)
 
 def get_frequencies(icao):
-    pass
+    import csv
+
+    with open('airport-frequencies.csv', 'r') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            if icao.lower() in row["airport_ident"].lower():
+
+                airport_id = row["id"]
+                airport_ref = row["airport_ref"]
+
+                type = row["type"]
+                desc = row["description"]
+                frq=row["frequency_mhz"]
+                wf.add_item(desc, str(frq) + " mhz",icon="images/radio.png",valid=False)
+
 
 
 if __name__ == u"__main__":
