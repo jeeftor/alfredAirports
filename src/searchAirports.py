@@ -2,8 +2,8 @@
 
 import sys
 from workflow import Workflow3, web
-
-
+from workflow.background import is_running
+from downloadDataFiles import string_from_percent, build_wf_entry
 # Airprot with autolookup
 
 # Data source: http://ourairports.com/data/airports.csv
@@ -15,6 +15,30 @@ def main(wf):
     code_match = []
     name_match = []
     other_match = []
+
+    import os.path
+    if not os.path.exists('airports.csv'):
+        if is_running('bg'):
+            pct = None
+            while pct is None:
+                try:
+                    pct = wf.stored_data('download_percent')
+                except:
+                    pass
+
+            progress = wf.stored_data('download_progress')
+            file = wf.stored_data('download_file')
+
+            wf.rerun = 0.5
+
+            title = "Please wait for data file downloads to complete"
+            subtitle = progress + " " + string_from_percent(pct) + " " + str(pct) + "%"
+            wf.add_item(title, subtitle=subtitle)
+        else:
+            wf.add_item('No data files','Run "aptinit" to get airport database', icon="images/evil.png", arg="aptinit")
+
+        wf.send_feedback()
+        return
 
 
     # "id","ident","type","name","latitude_deg","longitude_deg","elevation_ft","continent","iso_country","iso_region","municipality","scheduled_service","gps_code","iata_code","local_code","home_link","wikipedia_link","keywords"

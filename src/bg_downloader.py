@@ -60,7 +60,9 @@ def download_file(url, file_name):
         percent = round(percent * 100, 2)
         log.info("%s Downloaded %d of %d bytes %0.2f%%\r" % (file_name, bytes_so_far, total_size, percent))
         #sys.stdout.write("Downloaded %d of %d bytes (%0.2f%%)\r" % (bytes_so_far, total_size, percent))
-        wf.store_data('download_percent', "%0.1f%%" % percent)
+        print percent
+        wf.store_data('download_percent', percent)#"%0.1f" % percent)
+
 
 
 

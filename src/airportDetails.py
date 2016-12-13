@@ -2,7 +2,7 @@
 
 import sys
 from workflow import Workflow3
-
+from workflow.background import is_running
 
 def main(wf):
     query = str(wf.args[0])
@@ -11,11 +11,13 @@ def main(wf):
     wf.send_feedback()
 
 def get_airport_details_from_icao(icao):
+    found = False
     with open('airports.csv', 'r') as airport_file:
         next(airport_file)  # Skip first line
         for line in airport_file:
             parts = line.split(',')
             if parts[1][1:-1].lower() == icao.lower():
+                found = True
                 apt_type = parts[2].replace('"', '')
                 name = parts[3].replace('"', '')
                 latitude_deg = parts[4].replace('"', '')
@@ -64,7 +66,8 @@ def get_airport_details_from_icao(icao):
                     hl.add_modifier("cmd",subtitle='Edit the airport database', arg='http://ourairports.com/airports/' + icao.upper() + '/edit.html', valid=True)
                 else:
                     wf.add_item('Update Airport Info','Edit the airport database', icon="images/web.png", arg='http://ourairports.com/airports/' + icao.upper() + '/edit.html', valid=True)
-    pass
+    if not found:
+        wf.add_item('No Data for ICAO: ' + icao.upper(),'The airport database does not have any info for this airport', valid=False, icon="images/evil.png")
 
 def get_runways(icao):
     runways = set()

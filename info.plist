@@ -92,7 +92,7 @@ python src/airportDetails.py $query</string>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string></string>
+				<string>This function requires a valid ICAO code</string>
 				<key>title</key>
 				<string>Load details for an airport</string>
 				<key>type</key>
@@ -178,9 +178,9 @@ python src/airportDetails.py $query</string>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string>Updating database</string>
+				<string>Download/Update airport files from ourairports.com</string>
 				<key>title</key>
-				<string>Download data file</string>
+				<string>Update AIrport Database</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -210,7 +210,7 @@ python src/airportDetails.py $query</string>
 			<key>xpos</key>
 			<integer>50</integer>
 			<key>ypos</key>
-			<integer>180</integer>
+			<integer>210</integer>
 		</dict>
 		<key>B678B89E-8BDD-44D3-ADF6-AE2FF3123C60</key>
 		<dict>

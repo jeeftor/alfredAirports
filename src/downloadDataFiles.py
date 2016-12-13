@@ -8,18 +8,42 @@ from workflow.background import is_running, run_in_background
 import os
 
 
-def string_from_count(c):
+def string_from_percent(pct):
     """Returns a fancy string to show in the workflow from the count item"""
 
     blue = "\\U0001F535\\U0000FE0F"
     white = "\\U000026AA\\U0000FE0F"
     black = "\\U000026AB\\U0000FE0F"
 
-    ret = black + black + black + black + black + white + black + black + black + black + black
+    ret = black + black + black + black + black + black + black + black + black + black + white + black + black + black + black + black + black + black + black + black + black
 
-    mod = 2 * (5 - (c % 5))
+    mod = 2 * (10 - (int(pct / 10) % 10))
 
-    return ret.decode('unicode_escape')[mod:][0:10]
+    return ret.decode('unicode_escape')[mod:][0:20]
+
+def build_wf_entry(wf):
+
+    if is_running('bg'):
+        """Update status"""
+        pct = None
+        while pct is None:
+            try:
+                pct = wf.stored_data('download_percent')
+            except:
+                pass
+
+        progress = wf.stored_data('download_progress')
+        file = wf.stored_data('download_file')
+
+        wf.rerun = 0.5
+
+        title = "Downloading {} [{}]".format(file, progress)
+        subtitle = string_from_percent(pct) + " " + str(pct) + "%"
+        wf.add_item(title, subtitle=subtitle)
+    else:
+        """Last case"""
+        wf.add_item("File download complete", subtitle='Airport searching is now ready to use',
+                    icon="images/Checkmark.png")
 
 
 def main(wf):
@@ -34,30 +58,12 @@ def main(wf):
     if first_time:
 
         wf.rerun = 0.5
-        wf.store_data('download_percent', '0%')
+        wf.store_data('download_percent', 0)
         wf.add_item('Starting background process')
-        # run_in_background('bg', ['/usr/bin/python', wf.workflowfile('src/bg_downloader.py'),
-        #                          'http://ourairports.com/data/airports.csv'])
         run_in_background('bg', ['/usr/bin/python', wf.workflowfile('src/bg_downloader.py')])
 
     else:
-
-        if is_running('bg'):
-            """Update status"""
-            pct = wf.stored_data('download_percent')
-            progress = wf.stored_data('download_progress')
-            file = wf.stored_data('download_file')
-
-            wf.rerun = 0.5
-
-            title = "Downloading {} [{}]".format(file,progress)
-            subtitle = string_from_count(count) + " " + pct
-            wf.add_item(title,subtitle=subtitle)
-
-            count += 1
-        else:
-            """Last case"""
-            wf.add_item("File download complete",  icon="images/Checkmark.png")
+        build_wf_entry(wf)
 
     wf.setvar('count', count)
 
