@@ -21,7 +21,7 @@ def main(wf):
     with open('airports.csv', 'r') as airport_file:
         next(airport_file)  # Skip first line
         for line in airport_file:
-
+            line = line.rstrip('\n')
             if query in line.lower():
 
                 parts = line.split(',')
@@ -42,13 +42,10 @@ def main(wf):
                 local_code = parts[14].replace('"','')
                 home_link = parts[15].replace('"','')
                 wikipedia_link = parts[16].replace('"','')
-                keywords = parts[17:]
-
+                keywords = filter(None, [e.replace('"','') for e in parts[17:]])
 
                 # print icao, iata_code, local_code, name, home_link, wikipedia_link
                 codes = filter(None, set([icao, iata_code, gps_code, local_code]))
-
-
 
                 # print name, codes
                 # \\U0001F1F2\\U0001F1FD\\U0000FE0F
@@ -60,18 +57,22 @@ def main(wf):
                 # print iso_country, flag.decode('unicode_escape')
 
                 subtitle = ", ".join(codes) + " " + apt_type
+
+                if len(keywords) > 0:
+                    subtitle += " [" + ', '.join(keywords) + "]"
+
                 title = str(name).decode('utf-8', 'ignore') + " " + flag.decode('unicode_escape')
                 arg = icao
-                valid = True
+                valid = 'True'
 
-                value_map = {'subtitle':subtitle, 'title':title, 'arg':arg, 'valid':'True'}
+                value_map = {'subtitle':subtitle, 'title':title, 'arg':arg, 'valid':valid}
                 if any(filter(lambda x: query.upper() in x, codes)):
                     code_match.append(value_map)
                 elif query.upper() in name.upper():
                     name_match.append(value_map)
                 else:
                     other_match.append(value_map)
-                
+
         # Build ordered search results
         for i in code_match:
             wf.add_item(**i)

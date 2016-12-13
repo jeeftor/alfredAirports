@@ -127,7 +127,7 @@ python src/airportDetails.py $query</string>
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string></string>
+				<string>Searching</string>
 				<key>script</key>
 				<string>python ./src/searchAirports.py "{query}"</string>
 				<key>scriptargtype</key>
@@ -135,9 +135,9 @@ python src/airportDetails.py $query</string>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string></string>
+				<string>Search the airport database.  Matches ordered by code,name,other</string>
 				<key>title</key>
-				<string>Search ICAO / IATA codes for airport</string>
+				<string>Search Airports</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
