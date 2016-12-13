@@ -115,7 +115,7 @@ def get_runways(icao):
                     img = "{}.png".format(min(le_ident,he_ident))
 
                 title = "Runway {}/{}".format(le_ident,he_ident)
-                subtitle = "Length: {} Width: {}".format(length_ft, width_ft)
+                subtitle = "Length: {} Width: {} Surface: {} Lights: {}".format(length_ft, width_ft, surface, lighted)
 
                 wf.add_item(title,subtitle=subtitle, icon="images/runway/{}".format(img))
 
