@@ -46,6 +46,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{query}</string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>0AB166B0-4A70-4F0C-9DC4-E7CC89AE59B4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>argumenttype</key>
@@ -67,7 +86,7 @@
 				<key>script</key>
 				<string>query="{query}"
 
-python src/apt_info.py $query</string>
+python src/airportDetails.py $query</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -110,7 +129,7 @@ python src/apt_info.py $query</string>
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>python ./src/get_airport.py "{query}"</string>
+				<string>python ./src/searchAirports.py "{query}"</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -134,25 +153,6 @@ python src/apt_info.py $query</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>{query}</string>
-				<key>utf8</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>0AB166B0-4A70-4F0C-9DC4-E7CC89AE59B4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>argumenttype</key>
@@ -172,7 +172,7 @@ python src/apt_info.py $query</string>
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>python src/update_airports_file.py </string>
+				<string>python src/downloadDataFiles.py </string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -201,9 +201,9 @@ python src/apt_info.py $query</string>
 		<key>0AB166B0-4A70-4F0C-9DC4-E7CC89AE59B4</key>
 		<dict>
 			<key>xpos</key>
-			<integer>470</integer>
+			<integer>460</integer>
 			<key>ypos</key>
-			<integer>140</integer>
+			<integer>50</integer>
 		</dict>
 		<key>96414E0C-31DE-4450-AF9A-2978AF5C679E</key>
 		<dict>
