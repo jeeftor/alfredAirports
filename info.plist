@@ -4,6 +4,8 @@
 <dict>
 	<key>bundleid</key>
 	<string>org.jeef.airports</string>
+	<key>category</key>
+	<string>Tools</string>
 	<key>connections</key>
 	<dict>
 		<key>B678B89E-8BDD-44D3-ADF6-AE2FF3123C60</key>
@@ -244,6 +246,6 @@ Loads details for specified ICAO airport ID</string>
 	<key>version</key>
 	<string>0.5</string>
 	<key>webaddress</key>
-	<string></string>
+	<string>https://github.com/jeeftor/alfredAirports</string>
 </dict>
 </plist>
