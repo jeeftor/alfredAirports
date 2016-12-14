@@ -15,7 +15,7 @@ def string_from_percent(pct):
     white = "\\U000026AA\\U0000FE0F"
     black = "\\U000026AB\\U0000FE0F"
 
-    ret = black + black + black + black + black + black + black + black + black + black + white + black + black + black + black + black + black + black + black + black + black
+    ret = white + white + white + white + white + white + white + white + white + white + white + black + black + black + black + black + black + black + black + black + black
 
     mod = 2 * (10 - (int(pct / 10) % 10))
 

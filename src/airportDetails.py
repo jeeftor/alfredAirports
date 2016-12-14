@@ -48,7 +48,7 @@ def get_airport_details_from_icao(icao):
                     flag = "\\U000{}\\U000{}\\U0000FE0F".format(l1, l2)
 
                 wf.add_item(str(name).decode('utf-8', 'ignore') + " " + flag.decode('unicode_escape'), municipality + ", " + iso_region)
-
+                wf.add_item("Identifiers","ICAO: {} IATA: {} Local: {}it GPS: {}".format(icao, iata_code, local_code, gps_code))
                 wf.add_item("Location", subtitle=lla, icon="images/map.png", valid=True, arg=google_link)
 
                 # IF USA we have airnav
@@ -106,6 +106,12 @@ def get_runways(icao):
                 he_elevation_ft = parts[17].replace('"', '')
                 he_heading_degT = parts[18].replace('"', '')
                 he_displaced_threshold_ft = parts[19].replace('"', '')
+
+
+                if len(le_ident) == 1:
+                    le_ident = "0{}".format(le_ident)
+                if len(he_ident) == 1:
+                    he_ident = "0{}".format(he_ident)
 
                 if "L" in le_ident:
                     img = "{}.png".format(le_ident)
