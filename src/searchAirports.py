@@ -94,7 +94,7 @@ def main(wf):
 
                 value_map = {'subtitle':subtitle, 'title':title, 'arg':arg, 'valid':valid, 'icon':"images/{}.png".format(apt_type)}
 
-                
+
 
 
                 if any(filter(lambda x: query.upper() in x, codes)):
