@@ -34,11 +34,12 @@ github_token = str(GITHUB_ACCESS_TOKEN)
 #curl -i -H 'Authorization: token 5b8e3a4d92993282d2a8f20b5fe4910edc9f82dd' https://api.github.com/user/repos
 
 request_headers = {
-	"Content-Type": "application/json",
+  "Content-Type": "application/json",
     "Authorization": "token %s" % github_token
     }
 
 
+print request_headers
 
 # Release INFO
 payload = {
@@ -56,11 +57,13 @@ data = json.dumps(payload)
 clen = len(data)
 request_headers['Content-Length'] = clen
 url = "https://api.github.com/repos/{}/{}/releases".format(GITHUB_USER, GITHUB_REPO)
+url = 'https://api.github.com/repos/jeeftor/alfredAirports/releases'
+print url
 req = urllib2.Request(url, data, headers=request_headers)
 f = urllib2.urlopen(req)
 response = f.read()
 f.close()
-#pp_json(response)
+pp_json(response)
 json = json.loads(response)
 
 # Parse out the upload URL
