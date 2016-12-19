@@ -71,6 +71,9 @@ def main(wf):
                 # print icao, iata_code, local_code, name, home_link, wikipedia_link
                 codes = filter(None, set([icao, iata_code, gps_code, local_code]))
 
+
+
+
                 # print name, codes
                 # \\U0001F1F2\\U0001F1FD\\U0000FE0F
                 flag = ""
@@ -89,7 +92,11 @@ def main(wf):
                 arg = icao
                 valid = 'True'
 
-                value_map = {'subtitle':subtitle, 'title':title, 'arg':arg, 'valid':valid}
+                value_map = {'subtitle':subtitle, 'title':title, 'arg':arg, 'valid':valid, 'icon':"images/{}.png".format(apt_type)}
+
+                
+
+
                 if any(filter(lambda x: query.upper() in x, codes)):
                     code_match.append(value_map)
                 elif query.upper() in name.upper():

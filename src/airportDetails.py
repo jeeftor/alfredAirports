@@ -48,14 +48,14 @@ def get_airport_details_from_icao(icao):
                     flag = "\\U000{}\\U000{}\\U0000FE0F".format(l1, l2)
 
                 wf.add_item(str(name).decode('utf-8', 'ignore') + " " + flag.decode('unicode_escape'), municipality + ", " + iso_region)
-                wf.add_item("Identifiers","ICAO: {} IATA: {} Local: {}it GPS: {}".format(icao, iata_code, local_code, gps_code))
+                wf.add_item("Identifiers","ICAO: {} IATA: {} Local: {}it GPS: {}".format(icao, iata_code, local_code, gps_code), icon="images/icao.png")
                 wf.add_item("Location", subtitle=lla, icon="images/map.png", valid=True, arg=google_link)
 
                 # IF USA we have airnav
                 if iso_country == "US":
                     airnav_link = 'http://www.airnav.com/airport/{}'.format(icao)
                     wf.add_item("Airnav", "Open " + airnav_link, arg=airnav_link, valid=True,
-                                icon='http://thereviewsolution.com/img/rs/airnav.jpg')
+                                icon='images/airnav.png')
 
 
                 fl = wf.add_item("See Flights", "Open flightradar 24", arg=fr24link, valid=True, icon="images/radar.png")
@@ -64,11 +64,15 @@ def get_airport_details_from_icao(icao):
 
                 if wikipedia_link != "":
                     wf.add_item('Wiki','Open wikipedia link to airport', arg=wikipedia_link, icon="images/wiki.png", valid=True)
+
+
+
                 if home_link != "":
-                    hl = wf.add_item('Airport Website', 'Open the airports website', arg=home_link, icon="images/web.png", valid=True)
-                    hl.add_modifier("alt",subtitle='Edit the airport database', arg='http://ourairports.com/airports/' + icao.upper() + '/edit.html', valid=True)
+                    hl_arg = home_link
                 else:
-                    wf.add_item('Update Airport Info','Edit the airport database', icon="images/web.png", arg='http://ourairports.com/airports/' + icao.upper() + '/edit.html', valid=True)
+                    hl_arg = 'http://ourairports.com/airports/' + icao.upper()
+                hl = wf.add_item('Airport Website', 'Open the airports website', arg=hl_arg, icon="images/web.png", valid=True)
+                hl.add_modifier("alt",subtitle='Edit the airport database', arg='http://ourairports.com/airports/' + icao.upper() + '/edit.html', valid=True)
 
                 get_runways(icao)
 
