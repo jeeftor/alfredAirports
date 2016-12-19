@@ -1,5 +1,5 @@
-#OUTPUT=$(python build/packageWorkflow.py . -o build/)
-OUTPUT="Airport_Search Airport_Search-0.6.22.alfredworkflow 0.6.22"
+OUTPUT=$(python build/packageWorkflow.py . -o build/)
+#OUTPUT="Airport_Search Airport_Search-0.6.22.alfredworkflow 0.6.22"
 
 TEXT_ARRRAY=($OUTPUT)
 
@@ -41,7 +41,10 @@ echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     # do dangerous stuff
-    echo "DOING IT"
+    
     git add -u
     git commit -m "Prepping release ${TEXT_ARRRAY[2]}"
+    git push
+
+    python release.py ${TEXT_ARRRAY[2]} ${TEXT_ARRRAY[1]}
 fi
