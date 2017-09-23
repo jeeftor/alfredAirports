@@ -18,4 +18,4 @@ This workflow will search for Airports from the [Our Airports](http://ourairport
 ### Notes:
 
 * Data set from: Ourairports.com
-* Icons from: Icons8_
+* Icons from: [Icons8](http://icons8.com)
