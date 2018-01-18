@@ -8,22 +8,6 @@ echo ${TEXT_ARRRAY[0]}
 echo ${TEXT_ARRRAY[1]}
 echo ${TEXT_ARRRAY[2]}
 
-
-# Do you want to git?
-
-# https://github.com/repos/jeeftor/alfredAirports/releases
-
-# POST /repos/:owner/:repo/releases
-
-# {
-#   "tag_name": "v1.0.0",
-#   "target_commitish": "master",
-#   "name": "v1.0.0",
-#   "body": "Description of the release",
-#   "draft": false,
-#   "prerelease": false
-# }
-
 echo "     ________                               __   _______ __ "
 echo "    / ____/ /_  ____ _____  ____ ____  ____/ /  / ____(_) /__  _____ "
 echo "   / /   / __ \/ __ \`/ __ \/ __ \`/ _ \/ __  /  / /_  / / / _ \/ ___/ "

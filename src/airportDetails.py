@@ -39,7 +39,7 @@ def get_airport_details_from_icao(icao):
                 lla = "Lat: {} Lon: {} Alt: {} ft".format(latitude_deg, longitude_deg, elevation_ft)
 
                 flightaware = "http://flightaware.com/live/airport/" + icao.upper()
-                fr24link = "https://www.flightradar24.com/%0.2f/%0.2f/12" % (float(latitude_deg),float(longitude_deg))
+                fr24link = "https://www.flightradar24.com/%0.2f,%0.2f/12" % (float(latitude_deg),float(longitude_deg))
                 google_link = 'https://www.google.com/maps/preview/@{},{},14z'.format(latitude_deg,longitude_deg)
                 flag = ""
                 if len(iso_country) > 1:
@@ -58,7 +58,10 @@ def get_airport_details_from_icao(icao):
                                 icon='images/airnav.png')
 
 
-                fl = wf.add_item("See Flights", "Open flightradar 24", arg=fr24link, valid=True, icon="images/radar.png")
+                fl = wf.add_item("See Flights", "Open flightradar 24",
+                                 arg=fr24link,
+                                 valid=True,
+                                 icon="images/radar.png")
                 fl.add_modifier("alt",subtitle="Open Flight Aware", arg=flightaware, valid=True)
 
 
