@@ -25,10 +25,12 @@ echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     # do dangerous stuff
-    
+
     git add -u
     git commit -m "Prepping release ${TEXT_ARRRAY[2]}"
     git push
 
     python release.py ${TEXT_ARRRAY[2]} ${TEXT_ARRRAY[1]}
 fi
+
+
