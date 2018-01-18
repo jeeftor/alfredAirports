@@ -30,7 +30,7 @@ then
     git commit -m "Prepping release ${TEXT_ARRRAY[2]}"
     git push
 
-    echo python release.py ${TEXT_ARRRAY[2]} ${TEXT_ARRRAY[1]}
+    python release.py ${TEXT_ARRRAY[2]} ${TEXT_ARRRAY[1]}
 fi
 
 
